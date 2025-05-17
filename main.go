@@ -10,6 +10,10 @@ import (
 	"github.com/joho/godotenv"
 )
 
+type apiConfig struct {
+	// DB *database.Queries
+}
+
 func main() {
 
 	godotenv.Load()
@@ -33,7 +37,9 @@ func main() {
 
 	v1Router.Get("/health", handlerReadiness)
 	v1Router.Get("/err", handlerErr)
+	v1Router.Post("/users", apiConfig.handlerCreateUser)
 	router.Mount("/v1", v1Router)
+
 
 	srv := &http.Server{
 		Handler: router,
