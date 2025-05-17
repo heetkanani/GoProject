@@ -20,6 +20,12 @@ func (apiConfig *apiConfig)handlerCreateUser(w http.ResponseWriter, r *http.Requ
 
 	// apiConfig.DB.CreateUser()
 	responseWithError(w, 400, "Something went wrong")
+}
 
-
+//this is for getting the user by API key
+func (apiConfig *apiConfig)handlerGetUser(w http.ResponseWriter, r *http.Request) {
+	apiKey, err := auth.GetAPIKey(r.Header)
+	if err!=nil{
+		responseWithError(w, 403, fmt.Sprintf("auth error: %v", err));
+	}
 }
